@@ -1,1 +1,1 @@
-print("Welcome to my first game!")
+print("Welcome to LameGame!")
