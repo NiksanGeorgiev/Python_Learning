@@ -136,7 +136,7 @@ try:
     print('Link for the trailer: ' + driver.current_url)
     sleep(5)
 except:
-    print("Trailer link error")
+    print("Trailer link error ")
     
 print()
 print("Thanks for using my program!")
