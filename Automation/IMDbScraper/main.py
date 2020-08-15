@@ -10,7 +10,7 @@ PATH = "C:\Program Files (x86)\chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 driver.get('https://www.imdb.com')
 
-TITILE = 'Mulan'
+TITILE = 'Work It'
 YEAR = '2020'
 
 try:
@@ -31,8 +31,8 @@ except:
 sleep(10)
 
 #Print runtime and release date
-releaseDate = driver.find_elements_by_id("titleDetails")
-for element in releaseDate:
+titleDetails = driver.find_elements_by_id("titleDetails")
+for element in titleDetails:
     elText = element.text
     if "Release Date" in elText:
         startIndex = elText.find("Release Date")
@@ -43,6 +43,21 @@ for element in releaseDate:
         endindex = elText.find(" min")
         print(elText[startIndex:endindex+4])
 
+plotSummary = driver.find_elements_by_class_name('plot_summary')
+for element in plotSummary:
+    elText = element.text
+    if "Director" in elText:
+        startIndex = elText.find("Director")
+        endindex = elText.find("Writer")
+        print(elText[startIndex:endindex])
+
+titleCast = driver.find_elements_by_id('titleCast')
+characters = driver.find_elements_by_class_name('character')
+for i in range(len(characters)):
+    actors = driver.find_element_by_xpath('//*[@id="titleCast"]/table/tbody/tr[' + str(i+2) + ']/td[2]/a')
+    actorName = actors.text
+    characterName = characters[i].text
+    print(actorName + ' - ' + characterName)
 
 sleep(10)
 driver.quit()
