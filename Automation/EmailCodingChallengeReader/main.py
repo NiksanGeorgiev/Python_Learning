@@ -61,10 +61,10 @@ siteObject = driver.find_element_by_xpath('//*[@id="openid-buttons"]/button[1]')
 GoogleSignin.click()
 
 #Gmail mail address 
-waitingClickWithTextInput(10,'//*[@id="identifierId"]','email')
+waitingClickWithTextInput(10,'//*[@id="identifierId"]','lalugershterev69@gmail.com')
 
 #Gmail password obichampatki
-waitingClickWithTextInput(20,'//*[@id="password"]/div[1]/div/div[1]/input','pass')
+waitingClickWithTextInput(20,'//*[@id="password"]/div[1]/div/div[1]/input','obichampatki')
 
 # Open a new window
 time.sleep((10))
