@@ -61,10 +61,10 @@ siteObject = driver.find_element_by_xpath('//*[@id="openid-buttons"]/button[1]')
 GoogleSignin.click()
 
 #Gmail mail address 
-waitingClickWithTextInput(10,'//*[@id="identifierId"]','lalugershterev69@gmail.com')
+waitingClickWithTextInput(10,'//*[@id="identifierId"]','basketbal20030@gmail.com')
 
 #Gmail password obichampatki
-waitingClickWithTextInput(20,'//*[@id="password"]/div[1]/div/div[1]/input','obichampatki')
+waitingClickWithTextInput(20,'//*[@id="password"]/div[1]/div/div[1]/input','n3i6k0i3')
 
 # Open a new window
 time.sleep((10))
@@ -94,10 +94,6 @@ startIndex = codingChallengetext.find('Good morning!')
 endIndex = codingChallengetext.find('Upgrade to premium')
 print(codingChallengetext[startIndex:endIndex])
 
-if startIndex != -1:
-    f = open("DailyCoding.txt")
-    f.write(codingChallengetext[startIndex:endIndex])
-    f.close()
 
 time.sleep(10)
 driver.quit()
