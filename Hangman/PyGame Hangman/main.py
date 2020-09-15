@@ -29,7 +29,7 @@ for i in range(7):
 #game variables
 hangman_status = 0
 words = ["DEVELOPER", "PYTHON", "JAVASCRIPT", "GOOGLE", "ABSOLUTE", "ACCEPTED", "ACCURACY", "ACHIEVED", "AGENCIES", "ALTHOUGH", "AUDIENCE", "BIRTHDAY", "BUILDING", "BROTHERS", "CITIZEN", "CLICKING", "CONCEPTS", " CONSTANT", "CONTRACT", "APPLE", "ELEPTHANT", "INVOLVED", " LIFETIME", "WEEKEND", "WARRIORS", "VERTICAL", "SYNDROME", "SPECTRUM", "RESULTED", "ROMANTIC", " PROTOCOL", "PRESENTS", "ORGANIZE", "MOMENTUM", "NAVIGATE", "MAXMIZE", "LITERARY", "INTEGRAL", "HOMEMADE", "GUARDIAN", "EXTENDED", "EMERGING", "DEADLINE", "BOXES", "CLOSE", "FORTH", "HENCE", "INDEX", "JOINT", "JUDGE", "MAJOR", "MONEY", "QUICK", "QUITE", "SEEDS", "SKILLS", "TEAMS", "UNUSUAL", "WATCH", "WHOLE", "WOMEN", "YOUNG", "DOZEN", "FLESH", "ZONES", "EQUIP", "JUICY", "JEWEL", "LIMBS"]
-word = random.randint(0, len(words))
+word = words[random.randint(0, len(words))]
 guessed = []
 
 #fonts
@@ -50,7 +50,7 @@ def display_message(message):
     pygame.time.delay(500)
     windows.fill(WHITE)
     text = WORD_FONT.render(message, 1, BLACK)
-    windows.blit(text,(WIDTH/2 - text.get_width()/2, HEIGHT/2 - text.get_height()/2))
+    windows.blit(text,(int(WIDTH/2 - text.get_width()/2), int(HEIGHT/2 - text.get_height()/2)))
     pygame.display.update()
     pygame.time.delay(3000)
     
@@ -60,7 +60,7 @@ def draw():
 
     #draw title
     text = TITLE_FONT.render("HANGMAN", 1, BLACK)
-    windows.blit(text, (WIDTH/2 - text.get_width()/2, 20))
+    windows.blit(text, (int(WIDTH/2 - text.get_width()/2), 20))
 
     #draw words
     display_word = ""
@@ -78,7 +78,7 @@ def draw():
         if visible:
             pygame.draw.circle(windows, BLACK, (x,y), RADIUS, 3)
             text = LETTER_FONT.render(ltr, 1, BLACK)
-            windows.blit(text,(x - text.get_width()/2, y - text.get_height()/2))
+            windows.blit(text,(int(x - text.get_width()/2), int(y - text.get_height()/2)))
 
 
     
