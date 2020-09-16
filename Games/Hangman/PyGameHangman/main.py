@@ -23,7 +23,7 @@ for i in range(26):
 #load images
 images = []
 for i in range(7):
-    image = pygame.image.load('D:\Programing\Python\Python_Learning\Hangman\PyGame Hangman\hangman' + str(i) + '.png')
+    image = pygame.image.load('D:\Programing\Python\Python_Learning\Games\Hangman\PyGameHangman\hangman' + str(i) + '.png')
     images.append(image)
 
 #game variables
