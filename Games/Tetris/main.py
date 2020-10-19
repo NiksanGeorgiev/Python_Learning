@@ -253,6 +253,7 @@ def draw_window(surface):
     label = font.render('TETRIS', 1, (255,255,255))
  
     surface.blit(label, (top_left_x + play_width / 2 - (label.get_width() / 2), 30))
+ 
     for i in range(len(grid)):
         for j in range(len(grid[i])):
             pygame.draw.rect(surface, grid[i][j], (top_left_x + j* 30, top_left_y + i * 30, 30, 30), 0)
@@ -264,6 +265,7 @@ def draw_window(surface):
  
  
 def main():
+    global grid
  
     locked_positions = {}  # (x,y):(255,0,0)
     grid = create_grid(locked_positions)
