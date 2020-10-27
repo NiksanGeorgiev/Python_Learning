@@ -24,7 +24,70 @@ words = {
     "guitar": ("die", "Gitarre"),
     "heart": ("das", "Herz"),
     "dog": ("der", "Hund"),
-    "house": ("das", "Haus")
+    "house": ("das", "Haus"),
+    "hedgehog": ("der", "Igel"),
+    "island": ("die", "Insel"),
+    "boy": ("der", "Junge"),
+    "jacket": ("die", "Jacke"),
+    "yacht": ("die", "Yacht"),
+    "cook": ("der", "Koch"),
+    "cheese": ("der", "Kase"), # A Umlaut
+    "king": ("der", "Konig"), # O umlaut
+    "teacher": ("der", "Lehrer"),
+    "lion": ("der", "Lowe"), # O Umlaut
+    "lamp": ("die", "Lampe"),
+    "lamb": ("das", "Lamm"),
+    "moon": ("der", "Mond   "),
+    "coat": ("der", "Mantel"),
+    "mouse": ("die", "Maus"),
+    "night": ("die", "Nacht"),
+    "fog": ("der", "Nebel"),
+    "fruit": ("das", "Obst"),
+    "nose": ("die", "Nase"),
+    "grandpa": ("der", "Opa"),
+    "orange": ("die", "Orange"),
+    "horse": ("das", "Pferd"),
+    "pepper": ("der", "Paprika"),
+    "square": ("das", "Quadrat"),
+    "slide": ("die", "Rutsche"),
+    "radio": ("das", "Radio"),
+    "rain": ("der", "Regen"),
+    "sun": ("die", "Sonne"),
+    "bag": ("der", "Sack"),
+    "juice": ("der", "Saft"),
+    "tomato": ("die", "Tomate"),
+    "table": ("der", "Tisch"),
+    "door": ("die", "Tur"), # U umlaut
+    "clock": ("die", "Uhr"),
+    "subway": ("die", "U-Bahn"),
+    "bird": ("der", "Vogel"),
+    "vase": ("die", "Vase"),
+    "wine": ("der", "Wein"),
+    "water": ("das", "Wasser"),
+    "forest": ("der", "Wald"),
+    "father": ("der", "Vater"),
+    "yoga": ("das", "Yoga"),
+    "yard": ("das", "Yard"),
+    "zebra": ("das", "Zebra"),
+    "tooth": ("der", "Zahn"),
+    "zoo": ("der", "Zoo"),
+    "anger": ("der", "Arger"), # A umlaut
+    "oil": ("das", "Ol"), # O umlaut
+    "exercise": ("die", "Ubung"), # U umlaut at the beginnning
+    "foot": ("der", "Fuss"),
+    "egg": ("das", "Ei"),
+    "ladder": ("die", "Leiter"),
+    "bucket": ("der", "Eimer"),
+    "owl": ("die", "Eule"),
+    "pig": ("die", "Schweiz"),
+    "street": ("die", "Strasse"), # Estset
+    "sport": ("der", "Sport"),
+    "game": ("das", "Spiel"),
+    "books": ("die", "Bucher"), # U Umlaut
+    "blanket": ("die", "Decke"),
+    "piece": ("das", "Stuck"), # U umlaut
+    "place": ("der", "Platz"),
+    "knee": ("das", "Knie")
 }
 
 testedWords = []
