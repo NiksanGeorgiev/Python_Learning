@@ -17,7 +17,7 @@ words = {
     "lady": ("die", "Dame"),
     "elephant": ("der", "Elephant"),
     "donkey": ("der", "Esel"),
-    "strawbery": ("die", "Erdbeere"),
+    "strawberry": ("die", "Erdbeere"),
     "window": ("das", "Fenster"),
     "factory": ("die", "Fabrik"),
     "violin": ("die", "Geige"),
@@ -31,13 +31,13 @@ words = {
     "jacket": ("die", "Jacke"),
     "yacht": ("die", "Yacht"),
     "cook": ("der", "Koch"),
-    "cheese": ("der", "Kase"), # A Umlaut
-    "king": ("der", "Konig"), # O umlaut
+    "cheese": ("der", "Käse"), # ä
+    "king": ("der", "König"), # ö
     "teacher": ("der", "Lehrer"),
-    "lion": ("der", "Lowe"), # O Umlaut
+    "lion": ("der", "Löwe"), # ö
     "lamp": ("die", "Lampe"),
     "lamb": ("das", "Lamm"),
-    "moon": ("der", "Mond   "),
+    "moon": ("der", "Mond"),
     "coat": ("der", "Mantel"),
     "mouse": ("die", "Maus"),
     "night": ("die", "Nacht"),
@@ -57,7 +57,7 @@ words = {
     "juice": ("der", "Saft"),
     "tomato": ("die", "Tomate"),
     "table": ("der", "Tisch"),
-    "door": ("die", "Tur"), # U umlaut
+    "door": ("die", "Tür"), # ü
     "clock": ("die", "Uhr"),
     "subway": ("die", "U-Bahn"),
     "bird": ("der", "Vogel"),
@@ -71,21 +71,21 @@ words = {
     "zebra": ("das", "Zebra"),
     "tooth": ("der", "Zahn"),
     "zoo": ("der", "Zoo"),
-    "anger": ("der", "Arger"), # A umlaut
-    "oil": ("das", "Ol"), # O umlaut
-    "exercise": ("die", "Ubung"), # U umlaut at the beginnning
-    "foot": ("der", "Fuss"),
+    "anger": ("der", "Ärger"), # Ä
+    "oil": ("das", "Öl"), # Ö
+    "exercise": ("die", "Übung"), # Ü
+    "foot": ("der", "Fuß"), # ß
     "egg": ("das", "Ei"),
     "ladder": ("die", "Leiter"),
     "bucket": ("der", "Eimer"),
     "owl": ("die", "Eule"),
-    "pig": ("die", "Schweiz"),
-    "street": ("die", "Strasse"), # Estset
+    "pig": ("die", "Schwein"),
+    "street": ("die", "Straße"), # ß
     "sport": ("der", "Sport"),
     "game": ("das", "Spiel"),
-    "books": ("die", "Bucher"), # U Umlaut
+    "books": ("die", "Bücher"), # ü
     "blanket": ("die", "Decke"),
-    "piece": ("das", "Stuck"), # U umlaut
+    "piece": ("das", "Stück"), # ü
     "place": ("der", "Platz"),
     "knee": ("das", "Knie")
 }
