@@ -162,11 +162,21 @@ def Examine(wordsDict, isNoun= False):
         wordInGerman = wordsDict[randWord]
     userInput = input('Word in German: ')
     wrong = False
-    while wordInGerman != userInput:
+    if userInput == "": 
+        print("The right words is: ", wordInGerman)
+        wrongWords += 1
+        return True
+    counter = 1
+    while wordInGerman != userInput and counter < 4:
         print('Wrong!')
         wrong = True
         userInput = input('Word in German: ')
+        counter += 1
+        if userInput == "":
+            print("The right words is: ", wordInGerman)
+            return True
     if wrong:
+        print("The right words is: ", wordInGerman)
         wrongWords += 1
     print('Correct!')
     print()
