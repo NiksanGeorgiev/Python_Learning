@@ -99,27 +99,29 @@ verbs = {
 testedWords = []
 listWithCoices = [("Nouns", nouns), ('Verbs', verbs)]
 
-def ContinueExaming(listEnded= False):
+def ContinueExaming(isNoun= False,listEnded= False):
     global totalWords
     global wrongArticles
     global wrongWords
 
     if listEnded:
+        print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
         totalWords = 0
         wrongArticles = 0
         wrongWords = 0
         testedWords = []
-        print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
         return False
     while True:    
         continueTesting = input('Do you want another word? (y/n): ')
         print()
         if continueTesting.lower() == 'n':
+            if isNoun:
+                print('Article Score: {}/{}'.format(totalWords-wrongArticles, totalWords))
+            print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
             totalWords = 0
             wrongArticles = 0
             wrongWords = 0
             testedWords = []
-            print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
             return False
         elif continueTesting.lower() == 'y':
             return True
@@ -127,16 +129,15 @@ def ContinueExaming(listEnded= False):
             print('Please enter y or n!')
             print()
 
-    
 
 def Examine(wordsDict, isNoun= False):
     global totalWords
     global wrongWords
     global wrongArticles
-
+    
     if len(testedWords) == len(wordsDict):
         print("You have been tested on every word!")
-        ContinueExaming(True)
+        ContinueExaming(isNoun, True)
     randWord = random.choice(list(wordsDict.keys()))
     if randWord in testedWords:
 
@@ -146,9 +147,9 @@ def Examine(wordsDict, isNoun= False):
             Examine(wordsDict)
     else:
         testedWords.append(randWord)
+    totalWords += 1
+
     print(randWord)
-
-
     wordInGerman =''
     wrong = False
     if isNoun:
@@ -170,6 +171,7 @@ def Examine(wordsDict, isNoun= False):
         userInput = input('Word in German: ')
     if wrong:
         wrongWords += 1
+    print('Correct!')
     print()
 
 def ChoiceMenu():   
@@ -185,8 +187,7 @@ def ChoiceMenu():
         try:
             choice = int(input('Type in the number of your choice: '))
             if choice in range(1,len(listWithCoices) + 1):
-                wordDict = listWithCoices[choice-1][1]
-                print()      
+                wordDict = listWithCoices[choice-1][1]     
                 if choice == 1:
                     return wordDict, True
                 return wordDict, False
@@ -197,23 +198,25 @@ def ChoiceMenu():
         finally:
             print()
 
-
+#main cycle
 on = True
 while on:
     wordDict, isNoun = ChoiceMenu()
     passAnotherWord = True
     while passAnotherWord:
         Examine(wordDict, isNoun)
-        passAnotherWord = ContinueExaming()
+        passAnotherWord = ContinueExaming(isNoun)
     while True:
-        print('Do you want to select another category? (y/n)')
-        if input().lower() == 'y':
-            ChoiceMenu()
+        print()
+        choice = input('Do you want to select another category? (y/n): ')
+        print()
+        if choice.lower() == 'y':
             break
-        elif input().lower() == 'n':
+        elif choice.lower() == 'n':
             print()
             print('Till next time!')
             on = False
+            break
         else:
             print('Please enter y or n!')
     
