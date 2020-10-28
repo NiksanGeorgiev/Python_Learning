@@ -94,7 +94,7 @@ verbs = {
     "eat": "essen",
     "steal": "stehlen",
     "see": "sehen",
-    "go/walk": "gehen",
+    "go/walk": "gehen"
 }
 testedWords = []
 listWithCoices = [("Nouns", nouns), ('Verbs', verbs)]
@@ -103,7 +103,7 @@ def ContinueExaming(isNoun= False,listEnded= False):
     global totalWords
     global wrongArticles
     global wrongWords
-
+    global testedWords
     if listEnded:
         print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
         totalWords = 0
@@ -134,17 +134,14 @@ def Examine(wordsDict, isNoun= False):
     global totalWords
     global wrongWords
     global wrongArticles
-    
+    global testedWords
+
     if len(testedWords) == len(wordsDict):
         print("You have been tested on every word!")
-        ContinueExaming(isNoun, True)
+        return False
     randWord = random.choice(list(wordsDict.keys()))
-    if randWord in testedWords:
-
-        if isNoun:
-            Examine(wordsDict, isNoun)
-        else:
-            Examine(wordsDict)
+    while randWord in testedWords:
+        randWord = random.choice(list(wordsDict.keys()))
     else:
         testedWords.append(randWord)
     totalWords += 1
@@ -173,10 +170,10 @@ def Examine(wordsDict, isNoun= False):
         wrongWords += 1
     print('Correct!')
     print()
+    return True
 
 def ChoiceMenu():   
     wordDict = {}
-    isNoun = False
     print('Chose which category of words do you want to be examined on:')
 
     for i in range(len(listWithCoices)):
@@ -204,7 +201,7 @@ while on:
     wordDict, isNoun = ChoiceMenu()
     passAnotherWord = True
     while passAnotherWord:
-        Examine(wordDict, isNoun)
+        if not Examine(wordDict,isNoun): break
         passAnotherWord = ContinueExaming(isNoun)
     while True:
         print()
