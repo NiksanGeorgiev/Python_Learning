@@ -138,6 +138,7 @@ def Examine(wordsDict, isNoun= False):
 
     if len(testedWords) == len(wordsDict):
         print("You have been tested on every word!")
+        testedWords = []
         return False
     randWord = random.choice(list(wordsDict.keys()))
     while randWord in testedWords:
