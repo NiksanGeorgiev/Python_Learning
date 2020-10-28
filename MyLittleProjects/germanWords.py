@@ -1,10 +1,10 @@
 import random
 
-#TODO: New dictionary for and functions for verbs
+#Variables
 totalWords = 0
 wrongArticles = 0
 wrongWords = 0
-words = {
+nouns = {
     "alphabet": ("das", "Alphabet"),
     "monkey": ("der", "Affe"),
     "ant": ("die", "Ameise"),
@@ -89,56 +89,106 @@ words = {
     "place": ("der", "Platz"),
     "knee": ("das", "Knie")
 }
-
+verbs = {
+    "come": "kommen",
+    "eat": "essen",
+    "steal": "stehlen",
+    "see": "sehen",
+    "go/walk": "gehen",
+}
 testedWords = []
+listWithCoices = [("nouns", nouns), ('verbs', verbs)]
 
-def testRandomWord():
+def ContinueExaming():
     global totalWords
     global wrongArticles
     global wrongWords
-    if len(testedWords) == len(words):
-        print("You have been tested on every word!")
-        return False
-    totalWords += 1
-    #Choose and print word in english
-    randWord = random.choice(list(words.keys()))
-    if randWord in testedWords:
-        testRandomWord()
-    else:
-        testedWords.append(randWord)
-    print(randWord)
-    article, wordInGerman = words[randWord]
-    #Input and check the article
-    userInputArticle = input('Article: ')
-    wrongArticle = False
-    while article != userInputArticle:
-        print('Wrong!')
-        wrongArticle = True
-        userInputArticle = input('Article: ')
-    if wrongArticle:
-        wrongArticles += 1
-    #Input and check word
-    wrongWord = False
-    userInputWord = input('Word in German: ')
-    while wordInGerman != userInputWord:
-        print('Wrong!')
-        wrongWord = True
-        userInputWord = input('Word in German: ')
-    if wrongWord:
-        wrongWords += 1
-    print("Correct!")
-    print()
-
+    
     continueTesting = input('Do you want another word? (y/n): ')
     print()
     if continueTesting == 'n':
+        totalWords = 0
+        wrongArticles = 0
+        wrongWords = 0
+        testedWords = []
+        print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
         return False
-    return True
+    else:
+        return True
     
 
-passAnotherWord = True
-while passAnotherWord:
-    passAnotherWord = testRandomWord()
-else:
-    print('Article Score: {}/{}'.format(totalWords-wrongArticles, totalWords))
-    print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
+def Examine(wordsDict, isNoun= False):
+    global totalWords
+    global wrongWords
+
+
+    if len(testedWords) == len(wordsDict):
+        print("You have been tested on every word!")
+
+    randWord = random.choice(list(wordsDict.keys()))
+    if randWord in testedWords:
+
+        if isNoun:
+            Examine(wordsDict, isNoun)
+        else:
+            Examine(wordsDict)
+    else:
+        testedWords.append(randWord)
+    print(randWord)
+
+
+    wordInGerman =''
+    wrong = False
+    if isNoun:
+        article, wordInGerman = wordsDict[randWord]
+        userInputArticle = input('Article: ')
+        while article != userInputArticle:
+            print('Wrong!')
+            wrong = True
+            userInputArticle = input('Article: ')
+        if wrong:
+            wrongArticles += 1
+    else:
+        wordInGerman = wordsDict[randWord]
+    userInput = input('Word in German: ')
+    wrong = False
+    while wordInGerman != userInput:
+        print('Wrong!')
+        wrong = True
+        userInput = input('Word in German: ')
+    if wrong:
+        wrongWords += 1
+    print()
+
+def ChoiceMenu():   
+    wordDict = {}
+    isNoun = False
+    print('Chose which category of words do you want to be examined on:')
+
+    for i in range(len(listWithCoices)):
+        name, dictoray = listWithCoices[i]
+        print('{}.'.format(i+1), name)
+
+    while True:
+        try:
+            choice = int(input('Type in the number of your choice: '))
+            if choice in range(1,len(listWithCoices) + 1):
+                wordDict = listWithCoices[choice-1][1]
+                print()      
+                if choice == 1:
+                    return wordDict, True
+                return wordDict 
+            else:
+                print('Please enter a valid opition!')
+        except:
+            print('Please enter a whole number!')
+        finally:
+            print()
+
+
+while True:
+
+    passAnotherWord = True
+    while passAnotherWord:
+        Examine()
+        passAnotherWord = ContinueExaming()
