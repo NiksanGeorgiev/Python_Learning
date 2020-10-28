@@ -97,34 +97,46 @@ verbs = {
     "go/walk": "gehen",
 }
 testedWords = []
-listWithCoices = [("nouns", nouns), ('verbs', verbs)]
+listWithCoices = [("Nouns", nouns), ('Verbs', verbs)]
 
-def ContinueExaming():
+def ContinueExaming(listEnded= False):
     global totalWords
     global wrongArticles
     global wrongWords
-    
-    continueTesting = input('Do you want another word? (y/n): ')
-    print()
-    if continueTesting == 'n':
+
+    if listEnded:
         totalWords = 0
         wrongArticles = 0
         wrongWords = 0
         testedWords = []
         print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
         return False
-    else:
-        return True
+    while True:    
+        continueTesting = input('Do you want another word? (y/n): ')
+        print()
+        if continueTesting.lower() == 'n':
+            totalWords = 0
+            wrongArticles = 0
+            wrongWords = 0
+            testedWords = []
+            print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
+            return False
+        elif continueTesting.lower() == 'y':
+            return True
+        else:
+            print('Please enter y or n!')
+            print()
+
     
 
 def Examine(wordsDict, isNoun= False):
     global totalWords
     global wrongWords
-
+    global wrongArticles
 
     if len(testedWords) == len(wordsDict):
         print("You have been tested on every word!")
-
+        ContinueExaming(True)
     randWord = random.choice(list(wordsDict.keys()))
     if randWord in testedWords:
 
@@ -177,7 +189,7 @@ def ChoiceMenu():
                 print()      
                 if choice == 1:
                     return wordDict, True
-                return wordDict 
+                return wordDict, False
             else:
                 print('Please enter a valid opition!')
         except:
@@ -186,9 +198,22 @@ def ChoiceMenu():
             print()
 
 
-while True:
-
+on = True
+while on:
+    wordDict, isNoun = ChoiceMenu()
     passAnotherWord = True
     while passAnotherWord:
-        Examine()
+        Examine(wordDict, isNoun)
         passAnotherWord = ContinueExaming()
+    while True:
+        print('Do you want to select another category? (y/n)')
+        if input().lower() == 'y':
+            ChoiceMenu()
+            break
+        elif input().lower() == 'n':
+            print()
+            print('Till next time!')
+            on = False
+        else:
+            print('Please enter y or n!')
+    
