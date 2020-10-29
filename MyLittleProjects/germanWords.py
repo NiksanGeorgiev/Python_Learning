@@ -49,7 +49,7 @@ nouns = {
     "horse": ("das", "Pferd"),
     "pepper": ("der", "Paprika"),
     "square": ("das", "Quadrat"),
-    "slide": ("die", "Rutsche"),
+    "slide": ("die", "Rustche"),
     "radio": ("das", "Radio"),
     "rain": ("der", "Regen"),
     "sun": ("die", "Sonne"),
@@ -121,6 +121,8 @@ def ContinueExaming(isNoun= False,listEnded= False):
     global wrongWords
     global testedWords
     if listEnded:
+        if isNoun:
+            print('Article Score: {}/{}'.format(totalWords-wrongArticles, totalWords))
         print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
         totalWords = 0
         wrongArticles = 0
