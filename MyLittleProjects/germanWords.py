@@ -138,6 +138,10 @@ def Examine(wordsDict, isNoun= False):
 
     if len(testedWords) == len(wordsDict):
         print("You have been tested on every word!")
+        print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
+        totalWords = 0
+        wrongArticles = 0
+        wrongWords = 0
         testedWords = []
         return False
     randWord = random.choice(list(wordsDict.keys()))
