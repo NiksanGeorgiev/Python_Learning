@@ -96,8 +96,24 @@ verbs = {
     "see": "sehen",
     "go/walk": "gehen"
 }
+introducing = {
+    "What is your name?(with Name)": "Wie is dein Name",
+    "My name is(with Name)": "Mein Name ist",
+    "Who are you?": "Wer bist du",
+    "I am": "Ich bin",
+    "What is your name?": "Wie heißt du",
+    "My name is": "Ich heiße",
+    "How old are you?": "Wie alt bist du",
+    "I am 17 years old": "Ich bin 17 Jahre alt",
+    "Which languages do you speak?": "Welche Sprachen sprichst du",
+    "I speak English and a little German": "Ich spreche Englisch und ein wenig Deutsch",
+    "How are you?": "Wie geht es dir",
+    "I am fine": "Es geht mir gut",
+    "Where are you from?": "Woher kommst du",
+    "I come from Bulgaria": "Ich komme aus Bulgarien"
+}
 testedWords = []
-listWithCoices = [("Nouns", nouns), ('Verbs', verbs)]
+listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing)]
 
 def ContinueExaming(isNoun= False,listEnded= False):
     global totalWords
