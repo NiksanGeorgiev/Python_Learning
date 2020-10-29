@@ -1,6 +1,8 @@
 import random
 
 #Variables
+absoluteTotalWords = 0
+absoluteTotalWrongWords = 0
 totalWords = 0
 wrongArticles = 0
 wrongWords = 0
@@ -115,20 +117,14 @@ introducing = {
 testedWords = []
 listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing)]
 
-def ContinueExaming(isNoun= False,listEnded= False):
+def ContinueExaming(isNoun= False):
     global totalWords
     global wrongArticles
     global wrongWords
     global testedWords
-    if listEnded:
-        if isNoun:
-            print('Article Score: {}/{}'.format(totalWords-wrongArticles, totalWords))
-        print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
-        totalWords = 0
-        wrongArticles = 0
-        wrongWords = 0
-        testedWords = []
-        return False
+    global absoluteTotalWrongWords
+    global absoluteTotalWords
+
     while True:    
         continueTesting = input('Do you want another word? (y/n): ')
         print()
@@ -136,6 +132,8 @@ def ContinueExaming(isNoun= False,listEnded= False):
             if isNoun:
                 print('Article Score: {}/{}'.format(totalWords-wrongArticles, totalWords))
             print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
+            absoluteTotalWords += totalWords
+            absoluteTotalWrongWords += wrongWords
             totalWords = 0
             wrongArticles = 0
             wrongWords = 0
@@ -153,10 +151,16 @@ def Examine(wordsDict, isNoun= False):
     global wrongWords
     global wrongArticles
     global testedWords
+    global absoluteTotalWrongWords
+    global absoluteTotalWords
 
     if len(testedWords) == len(wordsDict):
         print("You have been tested on every word!")
+        if isNoun:
+            print('Article Score: {}/{}'.format(totalWords-wrongArticles, totalWords))
         print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
+        absoluteTotalWords += totalWords
+        absoluteTotalWrongWords += wrongWords
         totalWords = 0
         wrongArticles = 0
         wrongWords = 0
@@ -175,7 +179,7 @@ def Examine(wordsDict, isNoun= False):
     if isNoun:
         article, wordInGerman = wordsDict[randWord]
         userInputArticle = input('Article: ')
-        while article != userInputArticle:
+        while article != userInputArticle.strip():
             print('Wrong!')
             wrong = True
             userInputArticle = input('Article: ')
@@ -189,11 +193,15 @@ def Examine(wordsDict, isNoun= False):
         print("The right words is: ", wordInGerman)
         wrongWords += 1
         return True
+    if isNoun:
+        userInput = userInput.capitalize()
     counter = 1
-    while wordInGerman != userInput and counter < 4:
+    while wordInGerman != userInput.strip() and counter < 3:
         print('Wrong!')
         wrong = True
         userInput = input('Word in German: ')
+        if isNoun:
+            userInput = userInput.capitalize()
         counter += 1
         if userInput == "":
             print("The right words is: ", wordInGerman)
@@ -243,7 +251,7 @@ while on:
         if choice.lower() == 'y':
             break
         elif choice.lower() == 'n':
-            print()
+            print('Words score for the whole session: {}/{}'.format(absoluteTotalWords-absoluteTotalWrongWords, absoluteTotalWords))
             print('Till next time!')
             on = False
             break
