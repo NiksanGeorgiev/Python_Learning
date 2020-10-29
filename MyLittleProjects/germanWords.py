@@ -215,7 +215,7 @@ def Examine(wordsDict, isNoun= False):
 
 def ChoiceMenu():   
     wordDict = {}
-    print('Chose which category of words do you want to be examined on:')
+    print('Categories:')
 
     for i in range(len(listWithCoices)):
         name, dictoray = listWithCoices[i]
