@@ -89,7 +89,12 @@ nouns = {
     "blanket": ("die", "Decke"),
     "piece": ("das", "Stück"), # ü
     "place": ("der", "Platz"),
-    "knee": ("das", "Knie")
+    "knee": ("das", "Knie"),
+    "kitchen": ("die", "Küche"),
+    "child": ("das", "Kind"),
+    "man": ("der", "Mann"),
+    "woman": ("die", "Frau"),
+    "cupboard": ("der", "Schrank")
 }
 verbs = {
     "come": "kommen",
@@ -114,8 +119,22 @@ introducing = {
     "Where are you from?": "Woher kommst du",
     "I come from Bulgaria": "Ich komme aus Bulgarien"
 }
+greeting = {
+    "Hello": "Hallo",
+    "Good morning": "Guten Morgen",
+    "Good day": "Guten Tag",
+    "Good afternoon/evening": "Guten Abend",
+    "Good night": "Gute Nacht",
+    "Welcome": "Herzlich Willkommen",
+    "It's nice to meet you": "Es freut mich Sie kennenzulernen",
+    "Goodbye(in person)": "Auf Wiedersehen",
+    "Goodbye(on the phone)": "Auf Wiederhören",
+    "Bye": "Tschüs",
+    "See you soon": "Bis Bald"
+}
+
 testedWords = []
-listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing)]
+listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting)]
 
 def ContinueExaming(isNoun= False):
     global totalWords
