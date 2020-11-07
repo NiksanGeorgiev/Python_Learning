@@ -132,9 +132,29 @@ greeting = {
     "Bye": "Tschüs",
     "See you soon": "Bis Bald"
 }
-
+countries = {
+    "Germany":"Deutschland",
+    "Austria":"Östereich",
+    "Portugal":"Portugal",
+    "France":"Frankreich",
+    "Great Britan":"Großbritannien",
+    "Japan":"Japan",
+    "South Africa":"Südafrika",
+    "Canada":"Kanada",
+    "China":"China",
+    "Switzerland":"die Schweitz",
+    "Turkey":"die Türkei",
+    "USA":"die USA",
+    "English":"Englisch",
+    "French":"Französisch",
+    "Spanish":"Spanisch",
+    "Italian":"Italienisch",
+    "Chinese":"Chinesisch",
+    "Russian":"Russisch",
+    "German":"Deutsch"
+}
 testedWords = []
-listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting)]
+listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting), ("Countries and Nationalities",countries)]
 
 def ContinueExaming(isNoun= False):
     global totalWords
