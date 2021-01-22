@@ -1,4 +1,5 @@
 import random
+import time
 
 #Variables
 absoluteTotalWords = 0
@@ -153,9 +154,135 @@ countries = {
     "Russian":"Russisch",
     "German":"Deutsch"
 }
+family = {
+    "family": ("die", "Familie"),
+    "mother": ("die", "Mutter"),
+    "father": ("der", "Vater"),
+    "daughter": ("die", "Tochter"),
+    "son": ("der", "Sohn"),
+    "grandmother": ("die", "Großmutter"),
+    "grandfather": ("der", "Großvater"),
+    "aunt": ("die", "Tante"),
+    "uncle": ("der", "Onkel"),
+    "sister": ("die", "Schwester"),
+    "brother": ("der", "Bruder"),
+    "cousin": ("der", "Cousin"),
+    "granddaughter": ("die", "Enkelin"),
+    "grandson": ("der", "Enkel"),
+    "niece": ("die", "Nichte"),
+    "nephew": ("der", "Neffe"),
+    "wife": ("die", "Ehefrau"),
+    "husband": ("der", "Ehemann"),
+    "daughter-in-law": ("die", "Schwiegertochter"),
+    "son-in-law": ("der", "Schwiegersohn"),
+    "mother-in-law": ("die", "Schwiegermutter"),
+    "father-in-law": ("der", "Schwiegervater"),
+    "brother-in-law": ("der", "Schwager"),
+    "sister-in-law": ("die", "Schwägerin"),
+    "baby": ("das", "Baby"),
+    "child": ("das", "Kind"),
+    "boy": ("der", "Junge"),
+    "girl": ("das", "Mädchen"), 
+    "teenager": ("die", "Jugendliche"),
+    "adult": ("der", "Erwachsene") 
+    
+}
 testedWords = []
-listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting), ("Countries and Nationalities",countries)]
+listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting), ("Countries and Nationalities",countries), ("Family",family)]
 
+def time_convert(sec):
+  mins = sec // 60
+  sec = round(sec % 60)
+  
+  print("Time Lapsed = {0}:{1}".format(int(mins),sec))
+
+def Numbers():
+    low = int(input("Choose the lowest number: "))
+    high = int(input("Choose the highest number: "))+1
+    count = 0
+    start_time = time.time()
+    while (count < 20):
+        number = random.randint(low,high)
+        print(number)
+        answer = ""
+        numbers1to10 = ["eins","zwei","drei","vier","fünf", "sechs","sieben","acht","neun","zehn"]
+        number = str(number)
+        if len(number) == 4:
+            if number[0] == "1":
+                answer+="eintausend"
+            else:
+                answer+=numbers1to10[int(number[0])-1] + "tausend"
+            number = number[1:4]
+        if len(number) == 3:
+            if number[0] == "0":
+                pass
+            elif number[0] == "1":
+                answer += "einhundert"
+            else:
+                answer += numbers1to10[int(number[0])-1] + "hundert"
+            number = number[1:3]
+        if len(number) == 2:
+            if number[0] == "0":
+                number = number[1]
+            elif number[0] == "1":
+                if number == "11":
+                    answer += "elf"
+                elif number == "12":
+                    answer += "zwölf"
+                elif number == "16":
+                    answer += "sechzehn"
+                elif number == "17":
+                    answer += "siebzehn"
+                else:
+                    answer += numbers1to10[int(number[1])-1]+ "zehn"
+            elif number[0] == "2":
+                if number[1] == "0":
+                    answer += "zwanzig"
+                elif number[1] == "1":
+                    answer += "einundzwanzig"
+                else:
+                    answer += numbers1to10[int(number[1])-1]+ "undzwanzig"
+            elif number[0] == "3":
+                if number[1] == "0":
+                    answer += "dreißig"
+                elif number[1] == "1":
+                    answer += "einunddreißig"
+                else:
+                    answer += numbers1to10[int(number[1])-1]+ "unddreißig"
+            elif number[0] == "6":
+                if number[1] == "0":
+                    answer += "sechzig"
+                elif number[1] == "1":
+                    answer += "einundsechzig"
+                else:
+                    answer += numbers1to10[int(number[1])-1]+ "undsechzig"
+            elif number[0] == "7":
+                if number[1] == "0":
+                    answer += "siebzig"
+                elif number[1] == "1":
+                    answer += "einundsiebzig"
+                else:
+                    answer += numbers1to10[int(number[1])-1]+ "undsiebzig"
+            else:
+                if number[1] == "0":
+                    answer += numbers1to10[int(number[0])-1] + "zig"
+                if number[1] == "1":
+                    answer += "einund" + numbers1to10[int(number[0])-1] + "zig"
+                else:
+                    answer += numbers1to10[int(number[1])-1] + "und" + numbers1to10[int(number[0])-1] + "zig"
+        if len(number) == 1:
+            answer += numbers1to10[int(number)-1]
+        while answer != input().strip():
+            print("Wrong!")
+        else:
+            print("Correct!")
+            count += 1
+
+    end_time = time.time()
+    time_lapsed = end_time - start_time
+    time_convert(time_lapsed)
+        
+                
 def ContinueExaming(isNoun= False):
     global totalWords
     global wrongArticles
@@ -265,7 +392,7 @@ def ChoiceMenu():
             choice = int(input('Type in the number of your choice: '))
             if choice in range(1,len(listWithCoices) + 1):
                 wordDict = listWithCoices[choice-1][1]     
-                if choice == 1:
+                if choice == 1 or choice == 6:
                     return wordDict, True
                 return wordDict, False
             else:
@@ -276,6 +403,7 @@ def ChoiceMenu():
             print()
 
 #main cycle
+Numbers()
 on = True
 while on:
     wordDict, isNoun = ChoiceMenu()
