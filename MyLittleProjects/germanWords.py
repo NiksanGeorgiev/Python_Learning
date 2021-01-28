@@ -265,11 +265,9 @@ foods = {
     "Anything else?": ["Sonst noch etwas"],
     "This makes (smetka)": ["Das macht dann"],
 }
-asdf ={
-    "as": ["ds","sd","asdf"]
-}
+
 testedWords = []
-listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting), ("Countries and Nationalities",countries), ("Family",family), ("Foods", foods), ("asa",asdf)]
+listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting), ("Countries and Nationalities",countries), ("Family",family), ("Foods", foods)]
 
 def time_convert(sec):
   mins = sec // 60
