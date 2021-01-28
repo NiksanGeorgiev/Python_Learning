@@ -4,197 +4,276 @@ import time
 #Variables
 absoluteTotalWords = 0
 absoluteTotalWrongWords = 0
+absoluteTotalArticles = 0
+absoluteTotalWrongArticles = 0
+absoluteTotalPlurals = 0
+absoluteTotalWrongPlurals = 0
 totalWords = 0
 wrongArticles = 0
 wrongWords = 0
+totalArticles = 0
+totalPlurals = 0
+wrongPlurals = 0
+
 nouns = {
-    "alphabet": ("das", "Alphabet"),
-    "monkey": ("der", "Affe"),
-    "ant": ("die", "Ameise"),
-    "banana": ("die", "Banane"),
-    "boat": ("das", "Boot"),
-    "bus": ("der", "Bus"),
-    "CD": ("die", "CD"),
-    "camp": ("das", "Camp"),
-    "roof": ("das", "Dach"),
-    "lady": ("die", "Dame"),
-    "elephant": ("der", "Elephant"),
-    "donkey": ("der", "Esel"),
-    "strawberry": ("die", "Erdbeere"),
-    "window": ("das", "Fenster"),
-    "factory": ("die", "Fabrik"),
-    "violin": ("die", "Geige"),
-    "guitar": ("die", "Gitarre"),
-    "heart": ("das", "Herz"),
-    "dog": ("der", "Hund"),
-    "house": ("das", "Haus"),
-    "hedgehog": ("der", "Igel"),
-    "island": ("die", "Insel"),
-    "boy": ("der", "Junge"),
-    "jacket": ("die", "Jacke"),
-    "yacht": ("die", "Yacht"),
-    "cook": ("der", "Koch"),
-    "cheese": ("der", "Käse"), # ä
-    "king": ("der", "König"), # ö
-    "teacher": ("der", "Lehrer"),
-    "lion": ("der", "Löwe"), # ö
-    "lamp": ("die", "Lampe"),
-    "lamb": ("das", "Lamm"),
-    "moon": ("der", "Mond"),
-    "coat": ("der", "Mantel"),
-    "mouse": ("die", "Maus"),
-    "night": ("die", "Nacht"),
-    "fog": ("der", "Nebel"),
-    "fruit": ("das", "Obst"),
-    "nose": ("die", "Nase"),
-    "grandpa": ("der", "Opa"),
-    "orange": ("die", "Orange"),
-    "horse": ("das", "Pferd"),
-    "pepper": ("der", "Paprika"),
-    "square": ("das", "Quadrat"),
-    "slide": ("die", "Rustche"),
-    "radio": ("das", "Radio"),
-    "rain": ("der", "Regen"),
-    "sun": ("die", "Sonne"),
-    "bag": ("der", "Sack"),
-    "juice": ("der", "Saft"),
-    "tomato": ("die", "Tomate"),
-    "table": ("der", "Tisch"),
-    "door": ("die", "Tür"), # ü
-    "clock": ("die", "Uhr"),
-    "subway": ("die", "U-Bahn"),
-    "bird": ("der", "Vogel"),
-    "vase": ("die", "Vase"),
-    "wine": ("der", "Wein"),
-    "water": ("das", "Wasser"),
-    "forest": ("der", "Wald"),
-    "father": ("der", "Vater"),
-    "yoga": ("das", "Yoga"),
-    "yard": ("das", "Yard"),
-    "zebra": ("das", "Zebra"),
-    "tooth": ("der", "Zahn"),
-    "zoo": ("der", "Zoo"),
-    "anger": ("der", "Ärger"), # Ä
-    "oil": ("das", "Öl"), # Ö
-    "exercise": ("die", "Übung"), # Ü
-    "foot": ("der", "Fuß"), # ß
-    "egg": ("das", "Ei"),
-    "ladder": ("die", "Leiter"),
-    "bucket": ("der", "Eimer"),
-    "owl": ("die", "Eule"),
-    "pig": ("die", "Schwein"),
-    "street": ("die", "Straße"), # ß
-    "sport": ("der", "Sport"),
-    "game": ("das", "Spiel"),
-    "books": ("die", "Bücher"), # ü
-    "blanket": ("die", "Decke"),
-    "piece": ("das", "Stück"), # ü
-    "place": ("der", "Platz"),
-    "knee": ("das", "Knie"),
-    "kitchen": ("die", "Küche"),
-    "child": ("das", "Kind"),
-    "man": ("der", "Mann"),
-    "woman": ("die", "Frau"),
-    "cupboard": ("der", "Schrank")
+    "alphabet": ["Alphabet", "das"],
+    "monkey": ["Affe", "der"],
+    "ant": ["Ameise", "die"],
+    "banana": ["Banane", "die"],
+    "boat": ["Boot", "das"],
+    "bus": ["Bus", "der"],
+    "CD": ["CD", "die"],
+    "camp": ["Camp", "das"],
+    "roof": ["Dach", "das"],
+    "lady": ["Dame", "die"],
+    "elephant": ["Elephant", "der"],
+    "donkey": ["Esel", "der"],
+    "strawberry": ["Erdbeere", "die"],
+    "window": ["Fenster", "das"],
+    "factory": ["Fabrik", "die"],
+    "violin": ["Geige", "die"],
+    "guitar": ["Gitarre", "die"],
+    "heart": ["Herz", "das"],
+    "dog": ["Hund", "der"],
+    "house": ["Haus", "das"],
+    "hedgehog": ["Igel", "der"],
+    "island": ["Insel", "die"],
+    "boy": ["Junge", "der"],
+    "jacket": ["Jacke", "die"],
+    "yacht": ["Yacht", "die"],
+    "cook": ["Koch", "der"],
+    "cheese": ["Käse", "der"], # ä
+    "king": ["König", "der"], # ö
+    "teacher": ["Lehrer", "der"],
+    "lion": ["Löwe", "der"], # ö
+    "lamp": ["Lampe", "die"],
+    "lamb": ["Lamm", "das"],
+    "moon": ["Mond", "der"],
+    "coat": ["Mantel", "der"],
+    "mouse": ["Maus", "die"],
+    "night": ["Nacht", "die"],
+    "fog": ["Nebel", "der"],
+    "fruit": ["Obst", "das"],
+    "nose": ["Nase", "die"],
+    "grandpa": ["Opa", "der"],
+    "orange": ["Orange", "die"],
+    "horse": ["Pferd", "das"],
+    "pepper": ["Paprika", "der"],
+    "square": ["Quadrat", "das"],
+    "slide": ["Rustche", "die"],
+    "radio": ["Radio", "das"],
+    "rain": ["Regen", "der"],
+    "sun": ["Sonne", "die"],
+    "bag": ["Sack", "der"],
+    "juice": ["Saft", "der"],
+    "tomato": ["Tomate", "die"],
+    "table": ["Tisch", "der"],
+    "door": ["Tür", "die"], # ü
+    "clock": ["Uhr", "die"],
+    "subway": ["U-Bahn", "die"],
+    "bird": ["Vogel", "der"],
+    "vase": ["Vase", "die"],
+    "wine": [ "Wein", "der"],
+    "water": ["Wasser", "das"],
+    "forest": ["Wald", "der"],
+    "father": ["Vater", "der"],
+    "yoga": [ "Yoga", "das"],
+    "yard": ["Yard", "das"],
+    "zebra": ["Zebra", "das"],
+    "tooth": ["Zahn", "der"],
+    "zoo": ["Zoo", "der"],
+    "anger": ["Ärger", "der"], # Ä
+    "oil": ["Öl", "das"], # Ö
+    "exercise": ["Übung", "die"], # Ü
+    "foot": ["Fuß", "der"], # ß
+    "egg": ["Ei", "das"],
+    "ladder": ["Leiter", "die"],
+    "bucket": ["Eimer", "der"],
+    "owl": ["Eule", "die"],
+    "pig": ["Schwein", "die"],
+    "street": ["Straße", "die"], # ß
+    "sport": ["Sport", "der"],
+    "game": ["Spiel", "das"],
+    "books": ["Bücher", "die"], # ü
+    "blanket": ["Decke", "die"],
+    "piece": ["Stück", "das"], # ü
+    "place": ["Platz", "der"],
+    "knee": ["Knie", "das"],
+    "kitchen": ["Küche", "die"],
+    "child": ["Kind", "das"],
+    "man": ["Mann","der"],
+    "woman": ["Frau","die"],
+    "cupboard": ["Schrank", "der"]
 }
 verbs = {
-    "come": "kommen",
-    "eat": "essen",
-    "steal": "stehlen",
-    "see": "sehen",
-    "go/walk": "gehen"
+    "come": ["kommen"],
+    "eat": ["essen"],
+    "steal": ["stehlen"],
+    "see": ["sehen"],
+    "go/walk": ["gehen"],
+    "know": ["wissen"],
+    "do": ["machen"],
+    "say": ["sagen"],
+    "read": ["lesen"],
+    "play": ["spielen"],
+    "need/require": [""],
+    "buy": ["kaufen"],
+    "to shop": ["einkaufen"],
+    "find": ["finden"],
+    "search": ["suchen"],
+    "help": ["helfen"],
+    "want/would like": ["möchten"]
 }
 introducing = {
-    "What is your name?(with Name)": "Wie is dein Name",
-    "My name is(with Name)": "Mein Name ist",
-    "Who are you?": "Wer bist du",
-    "I am": "Ich bin",
-    "What is your name?": "Wie heißt du",
-    "My name is": "Ich heiße",
-    "How old are you?": "Wie alt bist du",
-    "I am 17 years old": "Ich bin 17 Jahre alt",
-    "Which languages do you speak?": "Welche Sprachen sprichst du",
-    "I speak English and a little German": "Ich spreche Englisch und ein wenig Deutsch",
-    "How are you?": "Wie geht es dir",
-    "I am fine": "Es geht mir gut",
-    "Where are you from?": "Woher kommst du",
-    "I come from Bulgaria": "Ich komme aus Bulgarien"
+    "What is your name?[with Name]": ["Wie is dein Name"],
+    "My name is[with Name]": ["Mein Name ist"],
+    "Who are you?": ["Wer bist du"],
+    "I am": ["Ich bin"],
+    "What is your name?": ["Wie heißt du"],
+    "My name is": ["Ich heiße"],
+    "How old are you?": ["Wie alt bist du"],
+    "I am 17 years old": ["Ich bin 17 Jahre alt"],
+    "Which languages do you speak?": ["Welche Sprachen sprichst du"],
+    "I speak English and a little German": ["Ich spreche Englisch und ein wenig Deutsch"],
+    "How are you?": ["Wie geht es dir"],
+    "I am fine": ["Es geht mir gut"],
+    "Where are you from?": ["Woher kommst du"],
+    "I come from Bulgaria": ["Ich komme aus Bulgarien"]
 }
 greeting = {
-    "Hello": "Hallo",
-    "Good morning": "Guten Morgen",
-    "Good day": "Guten Tag",
-    "Good afternoon/evening": "Guten Abend",
-    "Good night": "Gute Nacht",
-    "Welcome": "Herzlich Willkommen",
-    "It's nice to meet you": "Es freut mich Sie kennenzulernen",
-    "Goodbye(in person)": "Auf Wiedersehen",
-    "Goodbye(on the phone)": "Auf Wiederhören",
-    "Bye": "Tschüs",
-    "See you soon": "Bis Bald"
+    "Hello": ["Hallo"],
+    "Good morning": ["Guten Morgen"],
+    "Good day": ["Guten Tag"],
+    "Good afternoon/evening": ["Guten Abend"],
+    "Good night": ["Gute Nacht"],
+    "Welcome": ["Herzlich Willkommen"],
+    "It's nice to meet you": ["Es freut mich Sie kennenzulernen"],
+    "Goodbye[in person]": ["Auf Wiedersehen"],
+    "Goodbye[on the phone]": ["Auf Wiederhören"],
+    "Bye": ["Tschüs"],
+    "See you soon": ["Bis Bald"]
 }
 countries = {
-    "Germany":"Deutschland",
-    "Austria":"Östereich",
-    "Portugal":"Portugal",
-    "France":"Frankreich",
-    "Great Britan":"Großbritannien",
-    "Japan":"Japan",
-    "South Africa":"Südafrika",
-    "Canada":"Kanada",
-    "China":"China",
-    "Switzerland":"die Schweitz",
-    "Turkey":"die Türkei",
-    "USA":"die USA",
-    "English":"Englisch",
-    "French":"Französisch",
-    "Spanish":"Spanisch",
-    "Italian":"Italienisch",
-    "Chinese":"Chinesisch",
-    "Russian":"Russisch",
-    "German":"Deutsch"
+    "Germany":["Deutschland"],
+    "Austria":["Östereich"],
+    "Portugal":["Portugal"],
+    "France":["Frankreich"],
+    "Great Britan":["Großbritannien"],
+    "Japan":["Japan"],
+    "South Africa":["Südafrika"],
+    "Canada":["Kanada"],
+    "China":["China"],
+    "Switzerland":["die Schweitz"],
+    "Turkey":["die Türkei"],
+    "USA":["die USA"],
+    "English":["Englisch"],
+    "French":["Französisch"],
+    "Spanish":["Spanisch"],
+    "Italian":["Italienisch"],
+    "Chinese":["Chinesisch"],
+    "Russian":["Russisch"],
+    "German":["Deutsch"]
 }
 family = {
-    "family": ("die", "Familie"),
-    "mother": ("die", "Mutter"),
-    "father": ("der", "Vater"),
-    "daughter": ("die", "Tochter"),
-    "son": ("der", "Sohn"),
-    "grandmother": ("die", "Großmutter"),
-    "grandfather": ("der", "Großvater"),
-    "aunt": ("die", "Tante"),
-    "uncle": ("der", "Onkel"),
-    "sister": ("die", "Schwester"),
-    "brother": ("der", "Bruder"),
-    "cousin": ("der", "Cousin"),
-    "granddaughter": ("die", "Enkelin"),
-    "grandson": ("der", "Enkel"),
-    "niece": ("die", "Nichte"),
-    "nephew": ("der", "Neffe"),
-    "wife": ("die", "Ehefrau"),
-    "husband": ("der", "Ehemann"),
-    "daughter-in-law": ("die", "Schwiegertochter"),
-    "son-in-law": ("der", "Schwiegersohn"),
-    "mother-in-law": ("die", "Schwiegermutter"),
-    "father-in-law": ("der", "Schwiegervater"),
-    "brother-in-law": ("der", "Schwager"),
-    "sister-in-law": ("die", "Schwägerin"),
-    "baby": ("das", "Baby"),
-    "child": ("das", "Kind"),
-    "boy": ("der", "Junge"),
-    "girl": ("das", "Mädchen"), 
-    "teenager": ("die", "Jugendliche"),
-    "adult": ("der", "Erwachsene") 
-    
+    "family": ["Familie", "die"],
+    "mother": ["Mutter", "die"],
+    "father": ["Vater", "der"],
+    "daughter": ["Tochter", "die"],
+    "son": ["Sohn", "der"],
+    "grandmother": ["Großmutter", "die"],
+    "grandfather": ["Großvater", "der"],
+    "aunt": ["Tante", "die"],
+    "uncle": ["Onkel", "der"],
+    "sister": ["Schwester", "die"],
+    "brother": ["Bruder", "der"],
+    "cousin": ["Cousin", "der"],
+    "granddaughter": ["Enkelin", "die"],
+    "grandson": ["Enkel", "der"],
+    "niece": ["Nichte", "die"],
+    "nephew": ["Neffe", "der"],
+    "wife": ["Ehefrau", "die"],
+    "husband": ["Ehemann", "der"],
+    "daughter-in-law": ["Schwiegertochter", "die"],
+    "son-in-law": ["Schwiegersohn", "der"],
+    "mother-in-law": ["Schwiegermutter", "die"],
+    "father-in-law": ["Schwiegervater", "der"],
+    "brother-in-law": ["Schwager", "der"],
+    "sister-in-law": ["Schwägerin", "die"],
+    "baby": ["Baby","das"],
+    "child": ["Kind","das"],
+    "boy": ["Junge","der"],
+    "girl": ["Mädchen", "das"], 
+    "teenager": ["Jugendliche", "die"],
+    "adult": [ "Erwachsene","der"]     
 }
+foods = {
+    "beer": ["Bier", "das"],
+    "bun": ["Brotchen", "das"],
+    "bread": ["Brot", "das"],
+    "egg": ["Ei", "das"],
+    "butter": ["Butter", "die"],
+    "tomato": ["Tomate", "die"],
+    "potatoe": ["Kartoffel", "die"],
+    "carrot": ["Karotte", "die"],
+    "fruit": ["Obst", "das"],
+    "vegetable": ["Gemüse", "das"],
+    "lettuce/salad": ["Salat", "der"],
+    "onion": ["Zwiebel", "die"],
+    "garlic": ["Knoblauch", "der"],
+    "apple": ["Apfel", "der"],
+    "banana": ["Banane", "die"],
+    "orange": ["Orange", "die"],
+    "grapes": ["Trauben", "die"],
+    "pear": ["Birne", "die"],
+    "coffe": ["Kaffee", "der"],
+    "tea": ["Tee", "der"],
+    "wine": ["Wein", "der"],
+    "water": ["Wasser", "das"],
+    "yogurt": ["Joghurt", "der"],
+    "cheese": ["Käse", "der"],
+    "cream": ["Sahne", "die"],
+    "milk": ["Milch", "die"],
+    "meat/flesh": ["Fleisch", "das"],
+    "sausage": ["Wurst", "die"],
+    "pork": ["Schweinefleisch", "das"],
+    "beef": ["Rindfleisch", "das"],
+    "chicken": ["Hänchenfleisch", "das"],
+    "lamb": ["Lammfleisch", "das"],
+    "fish": ["Fisch", "der"],
+    "salt": ["Salz", "das"],
+    "pepper": ["Pfeffer", "das"],
+    "sugar": ["Zucker", "der"],
+    "cake": ["Kuchen", "der"],
+    "pasta/noodles": ["Nudeln", "die"],
+    "rice": ["Reis", "der"],
+    "flour": ["Mehl", "das"],
+    "supermarket": ["Supermarkt", "der"],
+    "shop": ["Laden", "der"],
+    "bakery": ["Bäckereri", "die"],
+    "market": ["Markt", "der"],
+    "butcher's shop": ["Merygerei", "der"],
+    "flower shop": ["Blumenladen", "der"],
+    "man seller": ["Verkäufer", "der"],
+    "woman seller": ["Verkäuferin", "die"],
+    "kilo": ["Kilogramm"],
+    "liter": ["Liter", "der"],
+    "bottle": ["Flasche", "die"],
+    "pack/package": ["Packung", "die"],
+    "cup": ["Becher", "der"],
+    "can": ["Dose", "die"],
+    "How much does is cost?": ["Wie viel kostet"],
+    "Anything else?": ["Sonst noch etwas"],
+    "This makes (smetka)": ["Das macht dann"],
+}
+
 testedWords = []
-listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting), ("Countries and Nationalities",countries), ("Family",family)]
+listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting), ("Countries and Nationalities",countries), ("Family",family), ("Foods", foods)]
 
 def time_convert(sec):
   mins = sec // 60
   sec = round(sec % 60)
   
-  print("Time Lapsed = {0}:{1}".format(int(mins),sec))
+  print("Time taken = {0}:{1}".format(int(mins),sec))
 
 def Numbers():
     low = int(input("Choose the lowest number: "))
@@ -207,12 +286,16 @@ def Numbers():
         answer = ""
         numbers1to10 = ["eins","zwei","drei","vier","fünf", "sechs","sieben","acht","neun","zehn"]
         number = str(number)
+
+        #Four digit numbers
         if len(number) == 4:
             if number[0] == "1":
                 answer+="eintausend"
             else:
                 answer+=numbers1to10[int(number[0])-1] + "tausend"
             number = number[1:4]
+
+        #three degit numbers
         if len(number) == 3:
             if number[0] == "0":
                 pass
@@ -221,12 +304,15 @@ def Numbers():
             else:
                 answer += numbers1to10[int(number[0])-1] + "hundert"
             number = number[1:3]
+        #two digit numbers
         if len(number) == 2:
             if number[0] == "0":
                 number = number[1]
             elif number[0] == "1":
                 if number == "11":
                     answer += "elf"
+                elif number == "10":
+                    answer += "zehn"
                 elif number == "12":
                     answer += "zwölf"
                 elif number == "16":
@@ -312,24 +398,38 @@ def ContinueExaming(isNoun= False):
             print()
 
 
-def Examine(wordsDict, isNoun= False):
+def Examine(wordsDict, hasArticle= False, hasPlural = False):
     global totalWords
     global wrongWords
     global wrongArticles
     global testedWords
     global absoluteTotalWrongWords
     global absoluteTotalWords
+    global absoluteTotalWrongArticles
+    global absoluteTotalArticles
+    global totalArticles
+    global totalPlurals
+    global wrongPlurals
+    global absoluteTotalPlurals
+    global absoluteTotalWrongPlurals
 
     if len(testedWords) == len(wordsDict):
         print("You have been tested on every word!")
-        if isNoun:
-            print('Article Score: {}/{}'.format(totalWords-wrongArticles, totalWords))
+        print('Article Score: {}/{}'.format(totalArticles-wrongArticles, totalArticles))
         print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
+        print('Plural Score: {}/{}'.format(totalPlurals-wrongPlurals, totalPlurals))
         absoluteTotalWords += totalWords
         absoluteTotalWrongWords += wrongWords
+        absoluteTotalArticles += totalArticles
+        absoluteTotalWrongArticles += wrongArticles
+        absoluteTotalPlurals += totalPlurals
+        absoluteTotalWrongPlurals += wrongPlurals
         totalWords = 0
         wrongArticles = 0
         wrongWords = 0
+        totalArticles = 0
+        totalPlurals = 0
+        wrongPlurals = 0
         testedWords = []
         return False
     randWord = random.choice(list(wordsDict.keys()))
@@ -339,43 +439,98 @@ def Examine(wordsDict, isNoun= False):
         testedWords.append(randWord)
     totalWords += 1
 
+    if len(wordsDict[randWord]) == 3:
+        hasPlural = True
+        hasArticle = True
+        totalArticles += 1
+        totalPlurals += 1
+
+    if len(wordsDict[randWord]) == 2:
+        hasArticle = True
+        totalArticles += 1
+
     print(randWord)
     wordInGerman =''
     wrong = False
-    if isNoun:
-        article, wordInGerman = wordsDict[randWord]
-        userInputArticle = input('Article: ')
-        while article != userInputArticle.strip():
-            print('Wrong!')
-            wrong = True
-            userInputArticle = input('Article: ')
-        if wrong:
-            wrongArticles += 1
-    else:
-        wordInGerman = wordsDict[randWord]
+    wordInGerman = wordsDict[randWord][0]
     userInput = input('Word in German: ')
-    wrong = False
+    counter = 1
     if userInput == "": 
         print("The right words is: ", wordInGerman)
         wrongWords += 1
-        return True
-    if isNoun:
-        userInput = userInput.capitalize()
-    counter = 1
+        counter = 4
+
     while wordInGerman != userInput.strip() and counter < 3:
         print('Wrong!')
         wrong = True
         userInput = input('Word in German: ')
-        if isNoun:
-            userInput = userInput.capitalize()
         counter += 1
         if userInput == "":
             print("The right words is: ", wordInGerman)
-            return True
+            counter = 4
+            wrongWords += 1
+            break
+
     if wrong:
-        print("The right words is: ", wordInGerman)
+        if counter == 3:
+                print("The right words is: ", wordInGerman)
         wrongWords += 1
-    print('Correct!')
+
+    if userInput == wordInGerman:
+        print('Correct!')
+
+    wrong = False
+    if hasArticle:
+        if hasPlural:
+            wordInGerman, article, *_ = wordsDict[randWord]
+        else:
+            wordInGerman, article = wordsDict[randWord]
+        userInput = input('Article: ') 
+        counter = 1
+        if userInput == "": 
+            print("The right words is: ", article)
+            wrongArticles += 1
+            counter = 4
+        while article != userInput.strip() and counter < 3:
+            print('Wrong!')
+            wrong = True
+            userInput = input('Article: ')
+            counter += 1
+            if userInput == "":
+                print("The right words is: ", article)
+                counter = 4
+                break
+        if wrong:
+            if counter == 3:
+                print("The right words is: ", article)
+            wrongArticles += 1
+        if userInput == article:
+            print('Correct!')
+
+    if hasPlural:
+        wordInGerman, article, plural = wordsDict[randWord]
+        userInput = input('Plural: ') 
+        counter = 1
+        if userInput == "": 
+            print("The right words is: ", plural)
+            wrongPlurals += 1
+            counter = 4
+        while plural != userInput.strip() and counter < 3:
+            print('Wrong!')
+            wrong = True
+            userInput = input('Plural: ')
+            counter += 1
+            if userInput == "":
+                print("The right words is: ", plural)
+                counter = 4
+                break
+        if wrong:
+            if counter == 3:
+                print("The right words is: ", plural)
+            wrongPlurals += 1
+        if userInput == plural:
+            print('Correct!')
+      
     print()
     return True
 
@@ -384,7 +539,7 @@ def ChoiceMenu():
     print('Categories:')
 
     for i in range(len(listWithCoices)):
-        name, dictoray = listWithCoices[i]
+        name, dictonary = listWithCoices[i]
         print('{}.'.format(i+1), name)
 
     while True:
@@ -392,9 +547,7 @@ def ChoiceMenu():
             choice = int(input('Type in the number of your choice: '))
             if choice in range(1,len(listWithCoices) + 1):
                 wordDict = listWithCoices[choice-1][1]     
-                if choice == 1 or choice == 6:
-                    return wordDict, True
-                return wordDict, False
+                return wordDict
             else:
                 print('Please enter a valid opition!')
         except:
@@ -403,14 +556,14 @@ def ChoiceMenu():
             print()
 
 #main cycle
-Numbers()
+#Numbers()
+start_time = time.time()
 on = True
 while on:
-    wordDict, isNoun = ChoiceMenu()
+    wordDict = ChoiceMenu()
     passAnotherWord = True
     while passAnotherWord:
-        if not Examine(wordDict,isNoun): break
-        passAnotherWord = ContinueExaming(isNoun)
+        if not Examine(wordDict): break  
     while True:
         print()
         choice = input('Do you want to select another category? (y/n): ')
@@ -418,10 +571,14 @@ while on:
         if choice.lower() == 'y':
             break
         elif choice.lower() == 'n':
+            print ('Article score for the whole session: {}/{}'.format(absoluteTotalArticles-absoluteTotalWrongArticles,absoluteTotalWrongArticles))
             print('Words score for the whole session: {}/{}'.format(absoluteTotalWords-absoluteTotalWrongWords, absoluteTotalWords))
+            print('Plural score for the whole session: {}/{}'.format(absoluteTotalPlurals-absoluteTotalWrongPlurals, absoluteTotalPlurals))
+            end_time = time.time()
+            time_lapsed = end_time - start_time
+            time_convert(time_lapsed) 
             print('Till next time!')
             on = False
             break
         else:
             print('Please enter y or n!')
-    
