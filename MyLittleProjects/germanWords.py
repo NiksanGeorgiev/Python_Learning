@@ -4,12 +4,17 @@ import time
 #Variables
 absoluteTotalWords = 0
 absoluteTotalWrongWords = 0
+absoluteTotalArticles = 0
+absoluteTotalWrongArticles = 0
 absoluteTotalPlurals = 0
 absoluteTotalWrongPlurals = 0
 totalWords = 0
-wrongPlurals = 0
+wrongArticles = 0
 wrongWords = 0
+totalArticles = 0
 totalPlurals = 0
+wrongPlurals = 0
+
 nouns = {
     "alphabet": ["Alphabet", "das"],
     "monkey": ["Affe", "der"],
@@ -110,7 +115,14 @@ verbs = {
     "do": ["machen"],
     "say": ["sagen"],
     "read": ["lesen"],
-    "play": ["spielen"]
+    "play": ["spielen"],
+    "need/require": [""],
+    "buy": ["kaufen"],
+    "to shop": ["einkaufen"],
+    "find": ["finden"],
+    "search": ["suchen"],
+    "help": ["helfen"],
+    "want/would like": ["möchten"]
 }
 introducing = {
     "What is your name?[with Name]": ["Wie is dein Name"],
@@ -192,11 +204,72 @@ family = {
     "boy": ["Junge","der"],
     "girl": ["Mädchen", "das"], 
     "teenager": ["Jugendliche", "die"],
-    "adult": [ "Erwachsene","der"] 
-    
+    "adult": [ "Erwachsene","der"]     
+}
+foods = {
+    "beer": ["Bier", "das"],
+    "bun": ["Brotchen", "das"],
+    "bread": ["Brot", "das"],
+    "egg": ["Ei", "das"],
+    "butter": ["Butter", "die"],
+    "tomato": ["Tomate", "die"],
+    "potatoe": ["Kartoffel", "die"],
+    "carrot": ["Karotte", "die"],
+    "fruit": ["Obst", "das"],
+    "vegetable": ["Gemüse", "das"],
+    "lettuce/salad": ["Salat", "der"],
+    "onion": ["Zwiebel", "die"],
+    "garlic": ["Knoblauch", "der"],
+    "apple": ["Apfel", "der"],
+    "banana": ["Banane", "die"],
+    "orange": ["Orange", "die"],
+    "grapes": ["Trauben", "die"],
+    "pear": ["Birne", "die"],
+    "coffe": ["Kaffee", "der"],
+    "tea": ["Tee", "der"],
+    "wine": ["Wein", "der"],
+    "water": ["Wasser", "das"],
+    "yogurt": ["Joghurt", "der"],
+    "cheese": ["Käse", "der"],
+    "cream": ["Sahne", "die"],
+    "milk": ["Milch", "die"],
+    "meat/flesh": ["Fleisch", "das"],
+    "sausage": ["Wurst", "die"],
+    "pork": ["Schweinefleisch", "das"],
+    "beef": ["Rindfleisch", "das"],
+    "chicken": ["Hänchenfleisch", "das"],
+    "lamb": ["Lammfleisch", "das"],
+    "fish": ["Fisch", "der"],
+    "salt": ["Salz", "das"],
+    "pepper": ["Pfeffer", "das"],
+    "sugar": ["Zucker", "der"],
+    "cake": ["Kuchen", "der"],
+    "pasta/noodles": ["Nudeln", "die"],
+    "rice": ["Reis", "der"],
+    "flour": ["Mehl", "das"],
+    "supermarket": ["Supermarkt", "der"],
+    "shop": ["Laden", "der"],
+    "bakery": ["Bäckereri", "die"],
+    "market": ["Markt", "der"],
+    "butcher's shop": ["Merygerei", "der"],
+    "flower shop": ["Blumenladen", "der"],
+    "man seller": ["Verkäufer", "der"],
+    "woman seller": ["Verkäuferin", "die"],
+    "kilo": ["Kilogramm"],
+    "liter": ["Liter", "der"],
+    "bottle": ["Flasche", "die"],
+    "pack/package": ["Packung", "die"],
+    "cup": ["Becher", "der"],
+    "can": ["Dose", "die"],
+    "How much does is cost?": ["Wie viel kostet"],
+    "Anything else?": ["Sonst noch etwas"],
+    "This makes (smetka)": ["Das macht dann"],
+}
+asdf ={
+    "as": ["ds","sd","asdf"]
 }
 testedWords = []
-listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting), ("Countries and Nationalities",countries), ("Family",family)]
+listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting), ("Countries and Nationalities",countries), ("Family",family), ("Foods", foods), ("asa",asdf)]
 
 def time_convert(sec):
   mins = sec // 60
@@ -327,29 +400,38 @@ def ContinueExaming(isNoun= False):
             print()
 
 
-def Examine(wordsDict, hasPlural= False):
+def Examine(wordsDict, hasArticle= False, hasPlural = False):
     global totalWords
     global wrongWords
-    global wrongPlurals
+    global wrongArticles
     global testedWords
     global absoluteTotalWrongWords
     global absoluteTotalWords
-    global absoluteTotalWrongPlurals
-    global absoluteTotalPlurals
+    global absoluteTotalWrongArticles
+    global absoluteTotalArticles
+    global totalArticles
     global totalPlurals
+    global wrongPlurals
+    global absoluteTotalPlurals
+    global absoluteTotalWrongPlurals
 
     if len(testedWords) == len(wordsDict):
         print("You have been tested on every word!")
-        print('Plural Score: {}/{}'.format(totalPlurals-wrongPlurals, totalPlurals))
+        print('Article Score: {}/{}'.format(totalArticles-wrongArticles, totalArticles))
         print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
+        print('Plural Score: {}/{}'.format(totalPlurals-wrongPlurals, totalPlurals))
         absoluteTotalWords += totalWords
         absoluteTotalWrongWords += wrongWords
+        absoluteTotalArticles += totalArticles
+        absoluteTotalWrongArticles += wrongArticles
         absoluteTotalPlurals += totalPlurals
         absoluteTotalWrongPlurals += wrongPlurals
         totalWords = 0
-        wrongPlurals = 0
+        wrongArticles = 0
         wrongWords = 0
+        totalArticles = 0
         totalPlurals = 0
+        wrongPlurals = 0
         testedWords = []
         return False
     randWord = random.choice(list(wordsDict.keys()))
@@ -359,9 +441,16 @@ def Examine(wordsDict, hasPlural= False):
         testedWords.append(randWord)
     totalWords += 1
 
-    if len(wordsDict[randWord]) == 2:
+    if len(wordsDict[randWord]) == 3:
         hasPlural = True
+        hasArticle = True
+        totalArticles += 1
         totalPlurals += 1
+
+    if len(wordsDict[randWord]) == 2:
+        hasArticle = True
+        totalArticles += 1
+
     print(randWord)
     wordInGerman =''
     wrong = False
@@ -372,6 +461,7 @@ def Examine(wordsDict, hasPlural= False):
         print("The right words is: ", wordInGerman)
         wrongWords += 1
         counter = 4
+
     while wordInGerman != userInput.strip() and counter < 3:
         print('Wrong!')
         wrong = True
@@ -382,16 +472,46 @@ def Examine(wordsDict, hasPlural= False):
             counter = 4
             wrongWords += 1
             break
+
     if wrong:
         if counter == 3:
                 print("The right words is: ", wordInGerman)
         wrongWords += 1
+
     if userInput == wordInGerman:
         print('Correct!')
+
     wrong = False
+    if hasArticle:
+        if hasPlural:
+            wordInGerman, article, *_ = wordsDict[randWord]
+        else:
+            wordInGerman, article = wordsDict[randWord]
+        userInput = input('Article: ') 
+        counter = 1
+        if userInput == "": 
+            print("The right words is: ", article)
+            wrongArticles += 1
+            counter = 4
+        while article != userInput.strip() and counter < 3:
+            print('Wrong!')
+            wrong = True
+            userInput = input('Article: ')
+            counter += 1
+            if userInput == "":
+                print("The right words is: ", article)
+                counter = 4
+                break
+        if wrong:
+            if counter == 3:
+                print("The right words is: ", article)
+            wrongArticles += 1
+        if userInput == article:
+            print('Correct!')
+
     if hasPlural:
-        wordInGerman, plural = wordsDict[randWord]
-        userInput = input('Article: ') # could be used dor plural
+        wordInGerman, article, plural = wordsDict[randWord]
+        userInput = input('Plural: ') 
         counter = 1
         if userInput == "": 
             print("The right words is: ", plural)
@@ -400,7 +520,7 @@ def Examine(wordsDict, hasPlural= False):
         while plural != userInput.strip() and counter < 3:
             print('Wrong!')
             wrong = True
-            userInput = input('Article: ')# could be used dor plural
+            userInput = input('Plural: ')
             counter += 1
             if userInput == "":
                 print("The right words is: ", plural)
@@ -412,8 +532,7 @@ def Examine(wordsDict, hasPlural= False):
             wrongPlurals += 1
         if userInput == plural:
             print('Correct!')
-            
-    
+      
     print()
     return True
 
@@ -439,6 +558,7 @@ def ChoiceMenu():
             print()
 
 #main cycle
+#Numbers()
 start_time = time.time()
 on = True
 while on:
@@ -453,11 +573,12 @@ while on:
         if choice.lower() == 'y':
             break
         elif choice.lower() == 'n':
-            print ('Article score for the whole session: {}/{}'.format(absoluteTotalPlurals-absoluteTotalWrongPlurals,absoluteTotalWrongPlurals))
+            print ('Article score for the whole session: {}/{}'.format(absoluteTotalArticles-absoluteTotalWrongArticles,absoluteTotalWrongArticles))
             print('Words score for the whole session: {}/{}'.format(absoluteTotalWords-absoluteTotalWrongWords, absoluteTotalWords))
+            print('Plural score for the whole session: {}/{}'.format(absoluteTotalPlurals-absoluteTotalWrongPlurals, absoluteTotalPlurals))
             end_time = time.time()
             time_lapsed = end_time - start_time
-            time_convert(time_lapsed)
+            time_convert(time_lapsed) 
             print('Till next time!')
             on = False
             break
