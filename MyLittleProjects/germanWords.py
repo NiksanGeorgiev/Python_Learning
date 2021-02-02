@@ -1,7 +1,18 @@
 import random
 import time
+import os
 
 #Variables
+COLORS = {\
+"black":"\u001b[30;1m",
+"red": "\u001b[31;1m",
+"green":"\u001b[32m",
+"yellow":"\u001b[33;1m",
+"blue":"\u001b[34;1m",
+"magenta":"\u001b[35m",
+"cyan": "\u001b[36m",
+"white":"\u001b[37m"
+}
 absoluteTotalWords = 0
 absoluteTotalWrongWords = 0
 absoluteTotalArticles = 0
@@ -207,63 +218,63 @@ family = {
     "adult": [ "Erwachsene","der"]     
 }
 foods = {
-    "beer": ["Bier", "das"],
-    "bun": ["Brotchen", "das"],
-    "bread": ["Brot", "das"],
-    "egg": ["Ei", "das"],
-    "butter": ["Butter", "die"],
-    "tomato": ["Tomate", "die"],
-    "potatoe": ["Kartoffel", "die"],
-    "carrot": ["Karotte", "die"],
-    "fruit": ["Obst", "das"],
-    "vegetable": ["Gemüse", "das"],
-    "lettuce/salad": ["Salat", "der"],
-    "onion": ["Zwiebel", "die"],
-    "garlic": ["Knoblauch", "der"],
-    "apple": ["Apfel", "der"],
-    "banana": ["Banane", "die"],
-    "orange": ["Orange", "die"],
-    "grapes": ["Trauben", "die"],
-    "pear": ["Birne", "die"],
-    "coffe": ["Kaffee", "der"],
-    "tea": ["Tee", "der"],
-    "wine": ["Wein", "der"],
-    "water": ["Wasser", "das"],
-    "yogurt": ["Joghurt", "der"],
-    "cheese": ["Käse", "der"],
-    "cream": ["Sahne", "die"],
-    "milk": ["Milch", "die"],
-    "meat/flesh": ["Fleisch", "das"],
-    "sausage": ["Wurst", "die"],
-    "pork": ["Schweinefleisch", "das"],
-    "beef": ["Rindfleisch", "das"],
-    "chicken": ["Hänchenfleisch", "das"],
-    "lamb": ["Lammfleisch", "das"],
-    "fish": ["Fisch", "der"],
-    "salt": ["Salz", "das"],
-    "pepper": ["Pfeffer", "das"],
-    "sugar": ["Zucker", "der"],
-    "cake": ["Kuchen", "der"],
-    "pasta/noodles": ["Nudeln", "die"],
-    "rice": ["Reis", "der"],
-    "flour": ["Mehl", "das"],
-    "supermarket": ["Supermarkt", "der"],
-    "shop": ["Laden", "der"],
-    "bakery": ["Bäckereri", "die"],
-    "market": ["Markt", "der"],
-    "butcher's shop": ["Merygerei", "der"],
-    "flower shop": ["Blumenladen", "der"],
-    "man seller": ["Verkäufer", "der"],
-    "woman seller": ["Verkäuferin", "die"],
-    "kilo": ["Kilogramm"],
-    "liter": ["Liter", "der"],
-    "bottle": ["Flasche", "die"],
-    "pack/package": ["Packung", "die"],
-    "cup": ["Becher", "der"],
-    "can": ["Dose", "die"],
-    "How much does is cost?": ["Wie viel kostet"],
-    "Anything else?": ["Sonst noch etwas"],
-    "This makes (smetka)": ["Das macht dann"],
+    "beer": ["Bier", "das", "Biere"],
+    "bun": ["Brotchen", "das", "Brötchen"],
+    "bread": ["Brot", "das", "Brote"],
+    # "egg": ["Ei", "das", "Eier"],
+    # "butter": ["Butter", "die"],
+    # "tomato": ["Tomate", "die", "Tomaten"],
+    # "potatoe": ["Kartoffel", "die", "Kartoffeln"],
+    # "carrot": ["Karotte", "die", "Karotten"],
+    # "fruit": ["Obst", "das"],
+    # "vegetable": ["Gemüse", "das"],
+    # "lettuce/salad": ["Salat", "der"],
+    # "onion": ["Zwiebel", "die"],
+    # "garlic": ["Knoblauch", "der"],
+    # "apple": ["Apfel", "der", "Äpfel"],
+    # "banana": ["Banane", "die", "Bananen"],
+    # "orange": ["Orange", "die", "Orangen"],
+    # "grapes": ["Trauben", "die"],
+    # "pear": ["Birne", "die", "Birnen"],
+    # "coffe": ["Kaffee", "der"],
+    # "tea": ["Tee", "der"],
+    # "wine": ["Wein", "der"],
+    # "water": ["Wasser", "das"],
+    # "yogurt": ["Joghurt", "der"],
+    # "cheese": ["Käse", "der"],
+    # "cream": ["Sahne", "die"],
+    # "milk": ["Milch", "die"],
+    # "meat/flesh": ["Fleisch", "das"],
+    # "sausage": ["Wurst", "die"],
+    # "pork": ["Schweinefleisch", "das"],
+    # "beef": ["Rindfleisch", "das"],
+    # "chicken": ["Hänchenfleisch", "das"],
+    # "lamb": ["Lammfleisch", "das"],
+    # "fish": ["Fisch", "der"],
+    # "salt": ["Salz", "das"],
+    # "pepper": ["Pfeffer", "das"],
+    # "sugar": ["Zucker", "der"],
+    # "cake": ["Kuchen", "der"],
+    # "pasta/noodles": ["Nudeln", "die"],
+    # "rice": ["Reis", "der"],
+    # "flour": ["Mehl", "das"],
+    # "supermarket": ["Supermarkt", "der"],
+    # "shop": ["Laden", "der"],
+    # "bakery": ["Bäckerei", "die"],
+    # "market": ["Markt", "der"],
+    # "butcher's shop": ["Merzgerei", "der"],
+    # "flower shop": ["Blumenladen", "der"],
+    # "man seller": ["Verkäufer", "der"],
+    # "woman seller": ["Verkäuferin", "die"],
+    # "kilo": ["Kilogramm"],
+    # "liter": ["Liter", "der"],
+    # "bottle": ["Flasche", "die","Flaschen"],
+    # "pack/package": ["Packung", "die", "Packungen"],
+    # "cup": ["Becher", "der"],
+    # "can": ["Dose", "die", "Dosen"],
+    # "How much does is cost?": ["Wie viel kostet"],
+    # "Anything else?": ["Sonst noch etwas"],
+    # "This makes (smetka)": ["Das macht dann"],
 }
 
 testedWords = []
@@ -273,7 +284,7 @@ def time_convert(sec):
   mins = sec // 60
   sec = round(sec % 60)
   
-  print("Time taken = {0}:{1}".format(int(mins),sec))
+  print(colorText("[[cyan]]Time taken = [[blue]]{0}:{1}[[cyan]]".format(int(mins),sec)))
 
 def Numbers():
     low = int(input("Choose the lowest number: "))
@@ -368,7 +379,11 @@ def Numbers():
     time_lapsed = end_time - start_time
     time_convert(time_lapsed)
         
-                
+def colorText(text):
+    for color in COLORS:
+        text = text.replace("[[" + color + "]]", COLORS[color])
+    return text
+          
 def ContinueExaming(isNoun= False):
     global totalWords
     global wrongArticles
@@ -414,10 +429,10 @@ def Examine(wordsDict, hasArticle= False, hasPlural = False):
     global absoluteTotalWrongPlurals
 
     if len(testedWords) == len(wordsDict):
-        print("You have been tested on every word!")
-        print('Article Score: {}/{}'.format(totalArticles-wrongArticles, totalArticles))
-        print('Word Score: {}/{}'.format(totalWords-wrongWords, totalWords))
-        print('Plural Score: {}/{}'.format(totalPlurals-wrongPlurals, totalPlurals))
+        print(colorText("[[cyan]]You have been tested on every word!"))
+        print(colorText('[[cyan]]Article Score: [[blue]]{}/{}'.format(totalArticles-wrongArticles, totalArticles)))
+        print(colorText('[[cyan]]Word Score: [[blue]]{}/{}'.format(totalWords-wrongWords, totalWords)))
+        print(colorText('[[cyan]]Plural Score: [[blue]]{}/{}'.format(totalPlurals-wrongPlurals, totalPlurals)))
         absoluteTotalWords += totalWords
         absoluteTotalWrongWords += wrongWords
         absoluteTotalArticles += totalArticles
@@ -456,28 +471,28 @@ def Examine(wordsDict, hasArticle= False, hasPlural = False):
     userInput = input('Word in German: ')
     counter = 1
     if userInput == "": 
-        print("The right words is: ", wordInGerman)
+        print("The right words is: ", colorText('[[yellow]]'+ wordInGerman +'[[white]]'))
         wrongWords += 1
         counter = 4
 
     while wordInGerman != userInput.strip() and counter < 3:
-        print('Wrong!')
+        print(colorText('[[red]]Wrong![[white]]'))
         wrong = True
         userInput = input('Word in German: ')
         counter += 1
         if userInput == "":
-            print("The right words is: ", wordInGerman)
+            print("The right words is: ", colorText('[[yellow]]'+ wordInGerman +'[[white]]'))
             counter = 4
             wrongWords += 1
             break
 
     if wrong:
         if counter == 3:
-                print("The right words is: ", wordInGerman)
+                print("The right words is: ", colorText('[[yellow]]'+ wordInGerman +'[[white]]'))
         wrongWords += 1
 
     if userInput == wordInGerman:
-        print('Correct!')
+        print(colorText('[[green]]Correct![[white]]'))
 
     wrong = False
     if hasArticle:
@@ -488,63 +503,63 @@ def Examine(wordsDict, hasArticle= False, hasPlural = False):
         userInput = input('Article: ') 
         counter = 1
         if userInput == "": 
-            print("The right words is: ", article)
+            print("The right words is: ", colorText('[[yellow]]'+ article +'[[white]]'))
             wrongArticles += 1
             counter = 4
         while article != userInput.strip() and counter < 3:
-            print('Wrong!')
+            print(colorText('[[red]]Wrong![[white]]'))
             wrong = True
             userInput = input('Article: ')
             counter += 1
             if userInput == "":
-                print("The right words is: ", article)
+                print("The right words is: ", colorText('[[yellow]]'+ article +'[[white]]'))
                 counter = 4
                 break
         if wrong:
             if counter == 3:
-                print("The right words is: ", article)
+                print("The right words is: ", colorText('[[yellow]]'+ article +'[[white]]'))
             wrongArticles += 1
         if userInput == article:
-            print('Correct!')
+             print(colorText('[[green]]Correct![[white]]'))
 
     if hasPlural:
         wordInGerman, article, plural = wordsDict[randWord]
         userInput = input('Plural: ') 
         counter = 1
         if userInput == "": 
-            print("The right words is: ", plural)
+            print("The right words is: ", colorText('[[yellow]]'+ plural +'[[white]]'))
             wrongPlurals += 1
             counter = 4
         while plural != userInput.strip() and counter < 3:
-            print('Wrong!')
+            print(colorText('[[red]]Wrong![[white]]'))
             wrong = True
             userInput = input('Plural: ')
             counter += 1
             if userInput == "":
-                print("The right words is: ", plural)
+                print("The right words is: ", colorText('[[yellow]]'+ plural +'[[white]]'))
                 counter = 4
                 break
         if wrong:
             if counter == 3:
-                print("The right words is: ", plural)
+                print("The right words is: ", colorText('[[yellow]]'+ plural +'[[white]]'))
             wrongPlurals += 1
         if userInput == plural:
-            print('Correct!')
+             print(colorText('[[green]]Correct![[white]]'))
       
     print()
     return True
 
 def ChoiceMenu():   
     wordDict = {}
-    print('Categories:')
+    print(colorText('[[cyan]]Categories:'))
 
     for i in range(len(listWithCoices)):
         name, dictonary = listWithCoices[i]
-        print('{}.'.format(i+1), name)
+        print(colorText('[[magenta]]{}.'.format(i+1)), name)
 
     while True:
         try:
-            choice = int(input('Type in the number of your choice: '))
+            choice = int(input(colorText('[[cyan]]Type in the number of your choice: [[white]]')))
             if choice in range(1,len(listWithCoices) + 1):
                 wordDict = listWithCoices[choice-1][1]     
                 return wordDict
@@ -557,6 +572,7 @@ def ChoiceMenu():
 
 #main cycle
 #Numbers()
+os.system("cls")
 start_time = time.time()
 on = True
 while on:
@@ -566,18 +582,18 @@ while on:
         if not Examine(wordDict): break  
     while True:
         print()
-        choice = input('Do you want to select another category? (y/n): ')
+        choice = input(colorText('[[cyan]]Do you want to select another category? (y/n): [[white]]'))
         print()
         if choice.lower() == 'y':
             break
         elif choice.lower() == 'n':
-            print ('Article score for the whole session: {}/{}'.format(absoluteTotalArticles-absoluteTotalWrongArticles,absoluteTotalWrongArticles))
-            print('Words score for the whole session: {}/{}'.format(absoluteTotalWords-absoluteTotalWrongWords, absoluteTotalWords))
-            print('Plural score for the whole session: {}/{}'.format(absoluteTotalPlurals-absoluteTotalWrongPlurals, absoluteTotalPlurals))
+            print (colorText('[[cyan]]Article score for the whole session: [[blue]]{}/{}'.format(absoluteTotalArticles-absoluteTotalWrongArticles,absoluteTotalArticles)))
+            print(colorText('[[cyan]]Words score for the whole session: [[blue]]{}/{}'.format(absoluteTotalWords-absoluteTotalWrongWords, absoluteTotalWords)))
+            print(colorText('[[cyan]]Plural score for the whole session: [[blue]]{}/{}'.format(absoluteTotalPlurals-absoluteTotalWrongPlurals, absoluteTotalPlurals)))
             end_time = time.time()
             time_lapsed = end_time - start_time
             time_convert(time_lapsed) 
-            print('Till next time!')
+            print(colorText('[[green]]Till next time![[white]]'))
             on = False
             break
         else:
