@@ -127,7 +127,7 @@ verbs = {
     "say": ["sagen"],
     "read": ["lesen"],
     "play": ["spielen"],
-    "need/require": [""],
+    "need/require": ["brauchen"],
     "buy": ["kaufen"],
     "to shop": ["einkaufen"],
     "find": ["finden"],
@@ -411,7 +411,6 @@ def ContinueExaming(isNoun= False):
         else:
             print('Please enter y or n!')
             print()
-
 
 def Examine(wordsDict, hasArticle= False, hasPlural = False):
     global totalWords
