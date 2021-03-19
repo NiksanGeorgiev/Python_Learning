@@ -359,7 +359,8 @@ Wquest = {
     "When": ["Wann"],
     "How much": ["Wieviel"],
     "Which": ["Welche"],
-    "From where": ["Woher"]
+    "From where": ["Woher"],
+    "really": ["Wirklich"],
 } 
 importantWords = {
     "something/anything": ["etwas"],

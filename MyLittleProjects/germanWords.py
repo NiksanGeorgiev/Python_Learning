@@ -232,7 +232,6 @@ def Examine(wordsDict, hasArticle= False, hasPlural = False):
         if userInput == "":
             print("The right words is: ", colorText('[[yellow]]'+ wordInGerman +'[[white]]'))
             counter = 4
-            wrongWords += 1
             break
 
     if wrong:
