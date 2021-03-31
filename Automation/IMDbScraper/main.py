@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 
-PATH = "C:\Program Files (x86)\chromedriver.exe"
+PATH = "C:/Program Files (x86)/chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 driver.get('https://www.imdb.com')
 action = ActionChains(driver)

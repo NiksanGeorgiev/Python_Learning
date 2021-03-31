@@ -27,8 +27,20 @@ totalPlurals = 0
 wrongPlurals = 0
 
 testedWords = []
-listWithCoices = [("Nouns", nouns), ('Verbs', verbs), ("Introducing phrases", introducing), ("Greetings",greeting), ("Countries and Nationalities",countries), ("Family",family), ("Foods", foods),
-("Personal information", personalInfo), ("W questions",Wquest),("Important words",importantWords), ("Apartment", apartment)]
+listWithCoices = [
+    ("Nouns", nouns),
+    ('Verbs', verbs),
+    ("Introducing phrases", introducing),
+    ("Greetings",greeting),
+    ("Countries and Nationalities",countries),
+    ("Family",family), ("Foods", foods),
+    ("Personal information", personalInfo),
+    ("W questions",Wquest),
+    ("Important words",importantWords),
+    ("Apartment", apartment),
+    ("Weather", weather),
+    ("Adjectives", adjectives)     
+]
 
 def time_convert(sec):
   mins = sec // 60
